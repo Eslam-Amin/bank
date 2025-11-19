@@ -19,7 +19,7 @@ func main (){
 	fmt.Println("Welcome to GO Bank!")
 	fmt.Println("What do you want to do?")
 	for{
-		actionMenu()
+		optionsMenu()
 		fmt.Print("Your Choice: ")
 		var choice int 
 		fmt.Scan(&choice)
@@ -50,7 +50,7 @@ func main (){
 
 
 
-func actionMenu(){
+func optionsMenu(){
 	fmt.Println("1. Check Balance")
 	fmt.Println("2. Deposit Money")
 	fmt.Println("3. Withdraw Money")
