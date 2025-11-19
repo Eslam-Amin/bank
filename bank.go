@@ -60,7 +60,7 @@ func withdrawAmount(balance *float64){
 			storeTransactions("Withdrawal: ", withdrawAmount, "Failed")
 	}else{
 		*balance -= withdrawAmount
-		writeFloatToFile(*balance)
+		writeFloatToFile(*balance, ACCOUNT_BALANCE_FILE)
 		storeTransactions("Withdrawal: ", withdrawAmount, "Succeeded")
 	}
 }
@@ -75,13 +75,13 @@ func depositAmount(balance *float64){
 		}else {	
 			*balance += depositAmount
 			storeTransactions("Deposit: ", depositAmount, "Succeeded")
-			writeFloatToFile(*balance)
+			writeFloatToFile(*balance, ACCOUNT_BALANCE_FILE)
 	}
 }
 
-func writeFloatToFile(value float64){
+func writeFloatToFile(value float64, fileName string){
 	textValue := fmt.Sprint(value)
-	os.WriteFile(ACCOUNT_BALANCE_FILE, []byte(textValue), 0644)
+	os.WriteFile(fileName, []byte(textValue), 0644)
 }
 
 func getFloatFromFile(fileName string, defaultValue float64) (float64, error) {
