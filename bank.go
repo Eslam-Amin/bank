@@ -20,16 +20,18 @@ func main (){
 			fmt.Println("########################")
 		case 2:
 			depositAmount(&accountBalance)
+			fmt.Println("Balance: ", accountBalance)
 			fmt.Println("########################")
-		case 3:
+	case 3:
 			withdrawAmount(&accountBalance)
+			fmt.Println("Balance: ", accountBalance)
 			fmt.Println("########################")
 		case 4:
 			fmt.Println("Thanks for choosing our bank")
 			fmt.Println("Goodbye!")
 			return
 		default:
-				fmt.Println("Invalid Choice")
+			fmt.Println("Invalid Choice")
 		}
 	}
 }
