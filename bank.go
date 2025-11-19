@@ -5,9 +5,11 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"time"
 )
 
 const ACCOUNT_BALANCE_FILE = "balance.txt"
+const TRANSACTIONS_FILE = "transactions.txt"
 
 func main (){
 	var accountBalance, err  = readBalanceFromFile()
@@ -34,6 +36,9 @@ func main (){
 			fmt.Println("Balance: ", accountBalance)
 			fmt.Println("########################")
 		case 4:
+			printTransactions()
+			fmt.Println("########################")
+		case 5:
 			fmt.Println("Thanks for choosing our bank")
 			fmt.Println("Goodbye!")
 			return
@@ -49,7 +54,8 @@ func actionMenu(){
 	fmt.Println("1. Check Balance")
 	fmt.Println("2. Deposit Money")
 	fmt.Println("3. Withdraw Money")
-	fmt.Println("4. Exit")
+	fmt.Println("4. Transactions")
+	fmt.Println("5. Exit")
 }
 
 func withdrawAmount(balance *float64){
@@ -58,11 +64,14 @@ func withdrawAmount(balance *float64){
 	fmt.Scan(&withdrawAmount)
 	if withdrawAmount > *balance{
 		fmt.Println("Insufficient Balance")
+		storeTransactions("Withdrawal: ", withdrawAmount, "Failed")
 		}else if withdrawAmount <= 0 {
 			fmt.Println("Invalid Amount")
+			storeTransactions("Withdrawal: ", withdrawAmount, "Failed")
 	}else{
 		*balance -= withdrawAmount
 		writeBalanceToFile(*balance)
+		storeTransactions("Withdrawal: ", withdrawAmount, "Succeeded")
 	}
 }
 
@@ -72,8 +81,10 @@ func depositAmount(balance *float64){
 	fmt.Scan(&depositAmount)
 	if depositAmount <= 0 {
 		fmt.Println("Invalid Amount")
+		storeTransactions("Deposit: ", depositAmount, "Failed")
 		}else {	
 			*balance += depositAmount
+			storeTransactions("Deposit: ", depositAmount, "Succeeded")
 			writeBalanceToFile(*balance)
 	}
 }
@@ -96,3 +107,16 @@ func readBalanceFromFile() (float64, error) {
 	return currentBalance, nil
 }
 
+func storeTransactions(transaction string, amount float64, succeedOrFailed string){
+	data, _ := os.ReadFile(TRANSACTIONS_FILE)
+	textData := string(data)
+	currentTime := time.Now().Format("2006-01-02 15:04:05 Monday")
+	transactionText := fmt.Sprint(textData ,transaction, amount, " at ", currentTime, " (", succeedOrFailed ,") ", "\n")
+	os.WriteFile(TRANSACTIONS_FILE, []byte(transactionText), 0644)	
+}
+
+func printTransactions(){
+	data, _ := os.ReadFile(TRANSACTIONS_FILE)
+	textData := string(data)
+	fmt.Println(textData)
+}
