@@ -62,5 +62,9 @@ func depositAmount(balance *float64){
 	var depositAmount float64
 	fmt.Print("Deposit Amount: ")
 	fmt.Scan(&depositAmount)
-	*balance += depositAmount
+	if depositAmount <= 0 {
+		fmt.Println("Invalid Amount")
+		}else {	
+			*balance += depositAmount
+	}
 }
