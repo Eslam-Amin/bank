@@ -49,7 +49,13 @@ func withdrawAmount(balance *float64){
 	var withdrawAmount float64
 	fmt.Print("Withdraw Amount: ")
 	fmt.Scan(&withdrawAmount)
-	*balance -= withdrawAmount
+	if withdrawAmount > *balance{
+		fmt.Println("Insufficient Balance")
+		}else if withdrawAmount <= 0 {
+			fmt.Println("Invalid Amount")
+	}else{
+		*balance -= withdrawAmount
+	}
 }
 
 func depositAmount(balance *float64){
