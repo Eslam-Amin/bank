@@ -55,6 +55,7 @@ func withdrawAmount(balance *float64){
 			fmt.Println("Invalid Amount")
 	}else{
 		*balance -= withdrawAmount
+		writeBalanceToFile(*balance)
 	}
 }
 
@@ -66,5 +67,11 @@ func depositAmount(balance *float64){
 		fmt.Println("Invalid Amount")
 		}else {	
 			*balance += depositAmount
+			writeBalanceToFile(*balance)
 	}
+}
+
+func writeBalanceToFile(balance float64){
+	textBalance := fmt.Sprint(balance)
+	os.WriteFile(ACCOUNT_BALANCE_FILE, []byte(textBalance), 0644)
 }
