@@ -5,9 +5,12 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+
+	"example.com/bank/structs"
 )
 
-const TRANSACTIONS_FILE = "transactions.txt"
+const TRANSACTIONS_FILE = "transactions.json"
+
 
 func WriteFloatToFile(value float64, fileName string){
 	textValue := fmt.Sprint(value)
@@ -28,7 +31,9 @@ func GetFloatFromFile(fileName string, defaultValue float64) (float64, error) {
 }
 
 func PrintTransactions(){
-	data, _ := os.ReadFile(TRANSACTIONS_FILE)
-	textData := string(data)
-	fmt.Println(textData)
+	fmt.Println(structs.Transactions)
 }
+
+
+
+
