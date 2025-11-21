@@ -37,6 +37,5 @@ func (transaction Transaction) Save() error{
 	if err != nil {
 		return err
 	}
-
-	return os.WriteFile(fileName, jsonContent, 0644)
+	return os.WriteFile(TRANSACTIONS_FILE, jsonContent, 0644)
 }
