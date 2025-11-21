@@ -7,6 +7,8 @@ import (
 	"strconv"
 )
 
+const TRANSACTIONS_FILE = "transactions.txt"
+
 func WriteFloatToFile(value float64, fileName string){
 	textValue := fmt.Sprint(value)
 	os.WriteFile(fileName, []byte(textValue), 0644)
@@ -23,4 +25,10 @@ func GetFloatFromFile(fileName string, defaultValue float64) (float64, error) {
 		return defaultValue, errors.New("failed to parse stored value")
 	}
 	return value, nil
+}
+
+func PrintTransactions(){
+	data, _ := os.ReadFile(TRANSACTIONS_FILE)
+	textData := string(data)
+	fmt.Println(textData)
 }
