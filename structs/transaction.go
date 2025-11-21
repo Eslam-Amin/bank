@@ -7,6 +7,7 @@ import (
 )
 
 const TRANSACTIONS_FILE = "transactions.json"
+var Transactions []Transaction
 
 type Transaction struct {
 	TypeOfTransaction string `json:"typeOfTransaction"`
