@@ -25,11 +25,14 @@ func withdrawAmount(balance *float64){
 				*balance -= withdrawAmount
 				util.WriteFloatToFile(*balance, ACCOUNT_BALANCE_FILE)
 	}
-	transactionObj, err := structs.NewTransaction("Withdraw: ", withdrawAmount, successOrFailed, time.Now().Format("2006-01-02 15:04:05 Monday"))
+	transactionObj, err := structs.NewTransaction("Withdraw", withdrawAmount, successOrFailed, time.Now().Format("2006-01-02 15:04:05 Monday"))
 	if err != nil {
 		fmt.Println("Failed to create transaction object")
 		}else{
-			transactionObj.Save()
+			err = transactionObj.Save()
+			if err != nil {
+				fmt.Println(err)
+			}
 		}
 }
 
@@ -49,6 +52,9 @@ func depositAmount(balance *float64){
 	if err != nil {
 		fmt.Println("Failed to create transaction object")
 		}else{
-			transactionObj.Save()
+			err = transactionObj.Save()
+			if err != nil {
+				fmt.Println(err)
+			}
 		}
 }
