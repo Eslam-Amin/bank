@@ -39,3 +39,26 @@ func (transaction Transaction) Save() error{
 	}
 	return os.WriteFile(TRANSACTIONS_FILE, jsonContent, 0644)
 }
+
+
+func LoadTransactions() ([]Transaction, error) {  
+	var list []Transaction
+		if len(Transactions) > 0 {
+			return Transactions, nil
+		}
+    data, err := os.ReadFile(TRANSACTIONS_FILE)
+    if err != nil {
+        return nil, err
+    }
+		if len(data) ==0 {
+			Transactions = list
+			return list, nil
+		}
+		err = json.Unmarshal(data, &list);
+    if  err != nil {
+			return nil, err
+    }
+		
+		Transactions = list
+    return list, nil
+}
