@@ -36,7 +36,7 @@ func main (){
 			fmt.Println("Balance: ", accountBalance)
 			fmt.Println("########################")
 		case 4:
-			printTransactions()
+			util.PrintTransactions()
 			fmt.Println("########################")
 		case 5:
 			fmt.Println("Thanks for choosing our bank")
