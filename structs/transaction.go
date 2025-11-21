@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"errors"
 	"os"
-	"strings"
 )
 
 const TRANSACTIONS_FILE = "transactions.txt"
