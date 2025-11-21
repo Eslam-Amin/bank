@@ -31,9 +31,14 @@ func NewTransaction(typeOfTransaction string, amount float64, succeedOrFailed st
 }
 
 func (transaction Transaction) Save() error{
-	fileName := strings.ToLower(TRANSACTIONS_FILE+".json")
-	jsonContent, err := json.Marshal(transaction)
-	
+
+	listOfTransactions, err := LoadTransactions()
+	if err != nil {
+		return err
+	}
+	listOfTransactions = append(listOfTransactions, transaction)
+	Transactions = listOfTransactions
+	jsonContent, err := json.Marshal(listOfTransactions)
 	if err != nil {
 		return err
 	}
