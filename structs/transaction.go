@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-const TRANSACTIONS_FILE = "transactions.txt"
+const TRANSACTIONS_FILE = "transactions.json"
 
 type Transaction struct {
 	TypeOfTransaction string `json:"typeOfTransaction"`
