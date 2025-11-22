@@ -32,7 +32,7 @@ func NewTransaction(typeOfTransaction string, amount float64, succeedOrFailed st
 
 func (transaction Transaction) Save() error{
 
-	listOfTransactions, err := LoadTransactions()
+	listOfTransactions, err := loadTransactions()
 	if err != nil {
 		return err
 	}
@@ -46,7 +46,8 @@ func (transaction Transaction) Save() error{
 }
 
 
-func LoadTransactions() ([]Transaction, error) {  
+
+func loadTransactions() ([]Transaction, error) {  
 	var list []Transaction
 		if len(Transactions) > 0 {
 			return Transactions, nil
